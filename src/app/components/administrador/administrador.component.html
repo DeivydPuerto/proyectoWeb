@@ -1,0 +1,41 @@
+<mat-tab-group>
+  <mat-tab label="Area del Consultor">
+    <form [formGroup]="areaConsultorForm" (ngSubmit)="createAreaConsultor()">
+      <div class="d-flex justify-content-evenly col-8">
+        <mat-form-field appearance="standard">
+          <mat-label>Codigo de area</mat-label>
+          <input matInput placeholder="01" formControlName="codigoArea">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Nombre de area</mat-label>
+          <input matInput placeholder="Usme" formControlName="nombreArea">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Numero de Consultores</mat-label>
+          <input matInput placeholder="10" formControlName="cantidadConsultores">
+        </mat-form-field>
+        <button mat-button type="submit">Guardar</button>
+      </div>
+    </form>
+    <div>
+      <table mat-table [dataSource]="areaConsultoriaData" class="mat-elevation-z8">
+        <ng-container matColumnDef="codigoArea">
+          <th mat-header-cell *matHeaderCellDef> Codigo </th>
+          <td mat-cell *matCellDef="let element"> {{element.codigoArea}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombreArea">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombreArea}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cantidadConsultores">
+          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+          <td mat-cell *matCellDef="let element"> {{element.cantidadConsultores}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="areaConsultoriaColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: areaConsultoriaColumns;"></tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Usuario"> Pendiente </mat-tab>
+  <mat-tab label="Ciudades"> Pendiente </mat-tab>
+</mat-tab-group>

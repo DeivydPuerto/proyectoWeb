@@ -1,6 +1,6 @@
 
 
-export interface Usuarios {
+export interface AreaConsultoria {
   codigoArea: Number,
   nombreArea: String,
   cantidadConsultores: Number,
