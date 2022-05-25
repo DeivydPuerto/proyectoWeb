@@ -1,6 +1,6 @@
 <mat-tab-group>
   <mat-tab label="Area del Consultor">
-    <form [formGroup]="areaConsultorForm" (ngSubmit)="createAreaConsultor()">
+    <form [formGroup]="areaConsultorForm">
       <div class="d-flex justify-content-evenly col-8">
         <mat-form-field appearance="standard">
           <mat-label>Codigo de area</mat-label>
@@ -14,9 +14,13 @@
           <mat-label>Numero de Consultores</mat-label>
           <input matInput placeholder="10" formControlName="cantidadConsultores">
         </mat-form-field>
-        <button mat-button type="submit">Guardar</button>
+        <button mat-button (click)="createAreaConsultor()">Guardar</button>
+        <button mat-button (click)="deleteAreaConsultor()">Eliminar</button>
+        <button mat-button (click)="putAreaConsultor()">Editar</button>
+        <button mat-button (click)="getByIdAreaConsultoria()">byid</button>
       </div>
     </form>
+    
     <div>
       <table mat-table [dataSource]="areaConsultoriaData" class="mat-elevation-z8">
         <ng-container matColumnDef="codigoArea">

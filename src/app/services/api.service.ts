@@ -26,12 +26,28 @@ export class ApiService {
   ]
 
   getAllAreaConsultoria() {
-    //return this.http.get<AreaConsultoria>(this.url + "api/areaConsultorias")
-    return this.mockAreaConsultoria
+    return this.http.get<AreaConsultoria[]>(this.url + "api/areaConsultorias")
+
+    //return this.mockAreaConsultoria
   }
 
   postAreaConsultoria(area: AreaConsultoria) {
-    //return this.http.post(this.url + "api/areaConsultorias", area)
-    return this.mockAreaConsultoria.push(area)
+    return this.http.post(this.url + "api/areaConsultorias", area)
+    //return this.mockAreaConsultoria.push(area)
+  }
+
+  deleteAreaConsultoria(area: AreaConsultoria) {
+    return this.http.delete(this.url + "api/areaConsultorias/"+area.codigoArea,)
+    //return this.mockAreaConsultoria.push(area)
+  }
+
+  putAreaConsultoria(area: AreaConsultoria) {
+    return this.http.put(this.url + "api/areaConsultorias/"+area.codigoArea, area)
+    //return this.mockAreaConsultoria.push(area)
+  }
+  getByIdAreaConsultoria(area: AreaConsultoria) {
+    console.log(area)
+    return this.http.get(this.url + "api/areaConsultorias/"+area.codigoArea,)
+    //return this.mockAreaConsultoria.push(area)
   }
 }
