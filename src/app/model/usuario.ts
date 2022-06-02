@@ -1,7 +1,7 @@
-
-
 export interface Usuarios {
-  codigoArea: Number,
-  nombreArea: String,
-  cantidadConsultores: Number,
+  id: Number,
+  password: String,
+  nickname: String,
+  phone: Number
+  email: String,
 }

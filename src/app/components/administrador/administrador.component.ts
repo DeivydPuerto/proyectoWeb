@@ -16,7 +16,7 @@ export class AdministradorComponent implements OnInit {
 
   public areaConsultorForm!: FormGroup;
 
-  public areaConsultoriaColumns: string[] = ['codigoArea', 'nombreArea', "cantidadConsultores"];
+  public areaConsultoriaColumns: string[] = ['codigoArea', 'nombreArea', "cantidadConsultores", "actions"];
   public areaConsultoriaData!: AreaConsultoria[];
 
   constructor(public service: ApiService) {
@@ -30,59 +30,71 @@ export class AdministradorComponent implements OnInit {
 
   createFromAreaConsultor() {
     this.areaConsultorForm = new FormGroup({
-      codigoArea: new FormControl("", [Validators.required]),
-      nombreArea: new FormControl("", [Validators.required]),
-      cantidadConsultores: new FormControl("", [Validators.required]),
-    });
-  }
-
-  createAreaConsultor() {
-    if (this.areaConsultorForm.valid) {
-      this.service.postAreaConsultoria(this.areaConsultorForm.value).subscribe(
-        data => {
-          this.getAreaConsultor()
-          this.areaConsultorTable.renderRows();
-        }
-      )
-    }
-  }
-
-  getAreaConsultor() {
-    this.service.getAllAreaConsultoria().subscribe((data: AreaConsultoria[]) => {
-      this.areaConsultoriaData = data
+      codigoArea: new FormControl("", [Validators.required, Validators.pattern('^[0-9]{1,16}$')]),
+      nombreArea: new FormControl("", [Validators.required, Validators.pattern('^[a-záéíóúñA-ZÁÉÍÓÚÑ]{1,64}$')]),
+      cantidadConsultores: new FormControl("", [Validators.required, Validators.pattern('^[0-9]{1,16}$')]),
     })
   }
 
-  deleteAreaConsultor() {
-    if (this.areaConsultorForm.value.codigoArea != 0) {
-      this.service.deleteAreaConsultoria(this.areaConsultorForm.value).subscribe((data) => {
-        this.getAreaConsultor()
-        this.areaConsultorTable.renderRows();
+  postAreaConsultor() {
+    if (this.areaConsultorForm.valid) {
+      // this.service.postAreaConsultoria(this.areaConsultorForm.value).subscribe(
+      //   data => {
+      //     this.getAreaConsultor()
+      //     this.areaConsultorTable.renderRows();
+      //   }
+      // )
+      this.service.postAreaConsultoriaMock(this.areaConsultorForm.value)
+      this.getAreaConsultor()
+      this.areaConsultorTable.renderRows()
+      this.areaConsultorForm.setValue({
+        codigoArea: "",
+        nombreArea: "",
+        cantidadConsultores: ""
       })
     }
   }
 
+  getAreaConsultor() {
+    // this.service.getAllAreaConsultoria().subscribe(
+    //   (data: AreaConsultoria[]) => {
+    //     this.areaConsultoriaData = data
+    //   }
+    // )
+    this.areaConsultoriaData = this.service.getAllAreaConsultoriaMock()
+  }
+
+  deleteAreaConsultor(id: Number) {
+    this.service.deleteAreaConsultoriaMock(id)
+    this.getAreaConsultor()
+    this.areaConsultorTable.renderRows()
+  }
+
   putAreaConsultor() {
     if (this.areaConsultorForm.valid) {
-      this.service.putAreaConsultoria(this.areaConsultorForm.value).subscribe(
-        data => {
-          this.getAreaConsultor()
-          this.areaConsultorTable.renderRows();
-        }
-      )
+      // this.service.putAreaConsultoria(this.areaConsultorForm.value).subscribe(
+      //   data => {
+      //     this.getAreaConsultor()
+      //     this.areaConsultorTable.renderRows();
+      //   }
+      // )
+      this.service.putAreaConsultoriaMock(this.areaConsultorForm.value)
+      this.getAreaConsultor()
+      this.areaConsultorTable.renderRows();
     }
   }
 
-  getByIdAreaConsultoria() {
-    this.service.getByIdAreaConsultoria(this.areaConsultorForm.value).subscribe((data) => {
-      //this.nombreArea = data
-    })
-    // if (this.areaConsultorForm.value.codigoArea != 0) {
-    this.service.getByIdAreaConsultoria(this.areaConsultorForm.value).subscribe((data) => {
-      this.getAreaConsultor()
-      this.areaConsultorTable.renderRows();
-    })
-    // }
-  }
+  getByIdAreaConsultoria(id: Number) {
+    // this.service.getByIdAreaConsultoria(id).subscribe(
+    //   (data: AreaConsultoria) => {
 
+    //   }
+    // )
+    const data = this.service.getByIdAreaConsultoriaMock(id)
+    this.areaConsultorForm.setValue({
+      codigoArea: data?.codigoArea,
+      nombreArea: data?.nombreArea,
+      cantidadConsultores: data?.cantidadConsultores
+    })
+  }
 }
