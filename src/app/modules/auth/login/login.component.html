@@ -1,0 +1,38 @@
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="loginForm" fxFlex="20%" fxFlex.sm="40%" fxFlex.xs="90%">
+        <img src="../../../../assets/images/icon.png" class="login-image">
+        <mat-card>
+
+            <div class="title_center">
+                <mat-card-title>Consultor Experto</mat-card-title>
+            </div>
+            <p></p>
+            <mat-card-subtitle>Ingrese sus credenciales</mat-card-subtitle>
+            <mat-card-content>
+                <mat-form-field class="full-width">
+                    <input id="emailInput" matInput placeholder="Correo" formControlName="email" autocomplete="email"
+                        type="email">
+                    <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
+                        El correo es invalido
+                    </mat-error>
+                    <mat-error id="requiredEmailError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        El correo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input id="passwordInput" matInput placeholder="Contraseña" formControlName="password"
+                        type="password" autocomplete="current-password">
+                    <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['password'].hasError('required')">
+                        La contraseña es requerida
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions class="login-actions">
+                <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
+                    (click)="login()">iniciar sesión</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </form>
+</div>

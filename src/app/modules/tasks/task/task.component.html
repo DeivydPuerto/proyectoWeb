@@ -1,0 +1,57 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <div class="container" fxLayout="row" fxLayoutAlign="center none">
+      <h1>Tareas</h1>
+    </div>
+    <div class="container">
+      <button mat-button color="accent" (click)="openModal(0)">Nueva Tarea</button>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="taskList" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="profession">
+            <th mat-header-cell *matHeaderCellDef> Profesión </th>
+            <td mat-cell *matCellDef="let element"> {{element.Profession.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="consultant">
+            <th mat-header-cell *matHeaderCellDef> Consultor </th>
+            <td mat-cell *matCellDef="let element"> {{element.Consultant.Access.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let element"> {{element.Customer.Access.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.State.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent" aria-label="Eliminar registro" (click)="deleteTask(element.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" aria-label="Editar registro" (click)="openModal(element.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

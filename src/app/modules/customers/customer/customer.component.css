@@ -1,0 +1,47 @@
+table {
+    width: 100%;
+}
+
+.mat-column-id {
+    width: 10px;
+    text-align: center;
+}
+
+.mat-column-name {
+    width: auto;
+    text-align: center;
+}
+
+.mat-column-profession {
+    width: auto;
+    text-align: center;
+}
+
+.mat-column-experience {
+    width: auto;
+    text-align: center;
+}
+
+.mat-column-email {
+    width: auto;
+    text-align: center;
+}
+
+.mat-column-phone {
+    width: auto;
+    text-align: center;
+}
+
+.mat-column-state {
+    width: 100px;
+    text-align: center;
+}
+
+.mat-column-actions {
+    width: 100px;
+    text-align: center;
+}
+
+.spaceField {
+    margin: 10px;
+}

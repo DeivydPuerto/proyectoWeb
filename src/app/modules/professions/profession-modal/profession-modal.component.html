@@ -1,0 +1,36 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <div class="container" fxLayout="row" fxLayoutAlign="center none">
+      <h1 *ngIf="professionEditId == 0">Nueva Profesión</h1>
+      <h1 *ngIf="professionEditId != 0">Editar Profesion</h1>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="professionForm">
+          <div fxLayout="column" fxLayoutAlign="space-between center">
+            <mat-form-field appearance="standard">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="name" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Descripción</mat-label>
+              <input matInput formControlName="description" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="state">
+                <div *ngFor="let state of statesList">
+                  <mat-option *ngIf="state.group=='profession'" [value]="state">
+                    {{state.name}}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+            <button *ngIf="professionEditId == 0" mat-button color="accent" (click)="saveProfession()">Guardar</button>
+            <button *ngIf="professionEditId != 0" mat-button color="warn" (click)="editProfession()">Editar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
